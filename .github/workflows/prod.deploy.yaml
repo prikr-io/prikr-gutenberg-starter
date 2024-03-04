@@ -1,0 +1,60 @@
+name: Production | 🚀 Deploy website on push
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [closed]
+    branches: [master]
+jobs:
+  web-deploy:
+    name: 🎉 Deploy to production server
+    runs-on: ubuntu-latest
+    env:
+      LIVE_SITE_URL: ${{ vars.PROD_SITE_URL }}
+      DESTINATION_PATH: ${{ vars.PROD_DESTINATION_PATH }}
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: 🛠 Building project
+        run: |
+          npm install
+          npm run build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/web-deploy@v1
+        with:
+          target-server: ${{ vars.PRIKR_IP }}
+          remote-user: ${{ vars.SSH_USERNAME }}
+          private-ssh-key: ${{ secrets.PRIVATE_RSA_KEY }}
+          ssh-port: ${{ vars.PRIKR_PORT }}
+          destination-path: ${{ env.DESTINATION_PATH }}
+          rsync-options: --delete-after --recursive --itemize-changes --exclude=.git*/** --exclude=.git* --exclude=**/.git*/** --exclude=src/** --exclude=src --exclude=node_modules --exclude=.prettierignore --exclude=.prettierrc.json --exclude=postcss.config.js --exclude=tailwind.config.js --exclude=.eslintrc.js --exclude=.googlefont.list --exclude=.purgecss.safelist.js --exclude=createdby.prikr.scss --exclude=.googlefonts.list --exclude=.babelrc --exclude=.gitignore --exclude=.eslintignore --exclude=.stylelintrc.json --exclude=gulpfile.js --exclude=package.json --exclude=package-lock.json --exclude=README.md --exclude=style.rejected.css --exclude=operators/** --exclude=operators --exclude=./src/** --exclude=./src --exclude=log/** --exclude=log
+      
+      - name: 📸 Take Screenshot of Live Site
+        run: |
+          npm install puppeteer
+          echo "const puppeteer = require('puppeteer');" > screenshot.js
+          echo "async function run() {" >> screenshot.js
+          echo "  const browser = await puppeteer.launch();" >> screenshot.js
+          echo "  const page = await browser.newPage();" >> screenshot.js
+          echo "  await page.setViewport({ width: 1920, height: 1080 });" >> screenshot.js
+          echo "  await page.goto('${{ env.LIVE_SITE_URL }}');" >> screenshot.js
+          echo "  await page.screenshot({path: 'screenshot.png'});" >> screenshot.js
+          echo "  await browser.close();" >> screenshot.js
+          echo "}" >> screenshot.js
+          echo "run();" >> screenshot.js
+          node screenshot.js
+
+      - name: 🔄 Upload Screenshot
+        run: |
+          # Create a temporary SSH key file
+          SSH_KEY_FILE=$(mktemp)
+          echo "${{ secrets.PRIVATE_RSA_KEY }}" > $SSH_KEY_FILE
+          chmod 600 $SSH_KEY_FILE
+
+          # Use the temporary file in the scp command
+          scp -P ${{ vars.PRIKR_PORT }} -i $SSH_KEY_FILE screenshot.png ${{ vars.SSH_USERNAME }}@${{ vars.PRIKR_IP }}:${{ env.DESTINATION_PATH }}/screenshot.png
+
+          # Clean up: remove the temporary SSH key file
+          rm $SSH_KEY_FILE
