@@ -4,7 +4,6 @@ const SyncThemeConfigPlugin = require('./config/js/SyncThemeConfigPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
 
 const LOCAL_ENV_URL = 'http://localhost/' // should contain http: or https:
 const DEV_MODE = process.env.NODE_ENV !== "production";
@@ -94,10 +93,8 @@ module.exports = {
     watchFiles: {
       paths: [
         './src/**/*.{js,jsx,ts,tsx}',
-        './block-templates/**/*.html',
-        './block-template-parts/**/*.html',
-        './**/*.php', // Watch PHP files
-        './**/**/*.php' // Watch PHP files
+        './**/*.{html,php}',
+        './**/**/*.{html,php}'
       ],
       options: {
         ignored: /node_modules/,

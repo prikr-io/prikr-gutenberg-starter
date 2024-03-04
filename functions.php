@@ -20,9 +20,9 @@ if (function_exists('wp_get_environment_type')) {
 /**
  * Setup theme
  */
-require_once PRIKR_THEME_PHP_DIR . '/core/setup.php';
+require_once PRIKR_THEME_DIR . '/theme/core/setup.php';
 
 /**
  * Add head meta tags based on project
  */
-require_once PRIKR_THEME_PHP_DIR . '/core/head.php';
+require_once PRIKR_THEME_DIR . '/theme/core/head.php';

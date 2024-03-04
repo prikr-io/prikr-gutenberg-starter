@@ -10,11 +10,8 @@ module.exports = {
     'header.php',
     'functions.php',
     'index.php',
-    // './src/**/*.{js,jsx,ts,tsx}',
-    'block-templates/*.{php,html}',
-    'block-template-parts/*.{php,html}',
-    // include PHP files if you want Tailwind to scan for classes in PHP
-    // './**/**/*.php'
+    'views/*.{php,html}',
+    'views/**/*.{php,html}',
   ],
   theme: {
     extend: {
