@@ -5,8 +5,7 @@
   "main": "src/js/index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --mode production",
-    "start": "NODE_ENV=development TAILWIND_MODE=watch webpack serve --mode development",
-    "dev": "webpack --mode development --watch"
+    "dev": "node config/js/CleanUpDev.js && NODE_ENV=development TAILWIND_MODE=watch webpack serve --mode development"
   },
   "keywords": [
     "fse",
@@ -22,6 +21,7 @@
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-react": "^7.23.3",
     "@fullhuman/postcss-purgecss": "^5.0.0",
+    "alpinejs": "^3.13.5",
     "autoprefixer": "^10.4.18",
     "babel-loader": "^9.1.3",
     "concurrently": "^8.2.2",
@@ -37,6 +37,7 @@
     "sass": "^1.71.1",
     "sass-loader": "^14.1.1",
     "style-loader": "^3.3.4",
+    "sweetalert2": "^11.10.5",
     "tailwind-ratio": "^1.0.1",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "^3.4.1",
@@ -44,5 +45,8 @@
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.2"
+  },
+  "dependencies": {
+    "babel-plugin-syntax-dynamic-import": "^6.18.0"
   }
 }

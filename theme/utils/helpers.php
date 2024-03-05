@@ -23,3 +23,23 @@ function prikr_get_asset($path)
 
   return add_query_arg('t', time(), $path);
 }
+
+/**
+ * Check if PRIKR email-address
+ */
+function prikr_check_email_domain($email) {
+  $email_domain = substr(strrchr($email, "@"), 1);
+  if ($email_domain === 'prikr.io') {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Check if user has PRIKR email-address
+ */
+function prikr_user_has_prikr_email() {
+  $user = wp_get_current_user();
+  $email = $user->user_email;
+  return prikr_check_email_domain($email);
+}

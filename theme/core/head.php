@@ -20,4 +20,4 @@ function prikr_add_tags_to_head() {
   $name = PRIKR_PROJECT_NAME;
   echo '<meta name="application-name" content="' . $name . '">';
 }
-add_action('wp_head', 'prikr_add_tags_to_head');
+add_action('wp_head', 'prikr_add_tags_to_head', 0);

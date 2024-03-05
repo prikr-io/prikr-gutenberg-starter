@@ -11,7 +11,7 @@ const DEV_MODE = process.env.NODE_ENV !== "production";
 function getBlockEntries() {
   const entries = {};
   for (const block in themeConfig.blocks) {
-    entries[block] = `./src/js/blocks/${themeConfig.blocks[block].js}`;
+    entries[block] = `./blocks/${block}/${themeConfig.blocks[block].js}`;
   }
   return entries;
 }
@@ -34,7 +34,6 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'public/js'), // Directory to output files
-    publicPath: '/js/', // Public URL of the output directory when referenced in a browser
     filename: '[name].min.js',
   },
   devtool: DEV_MODE ? 'source-map' : false,
@@ -45,7 +44,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
         }
       },
       {
@@ -60,6 +62,12 @@ module.exports = {
             },
           },
           {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
@@ -67,10 +75,14 @@ module.exports = {
               },
               sourceMap: true,
             },
-          }
+          },
+          
         ],
       }
     ]
+  },
+  stats: {
+    colors: true
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -97,7 +109,10 @@ module.exports = {
         './**/**/*.{html,php}'
       ],
       options: {
-        ignored: /node_modules/,
+        ignored: [
+          /node_modules/,
+          /blocks/
+        ] 
       },
     },
     proxy: [{

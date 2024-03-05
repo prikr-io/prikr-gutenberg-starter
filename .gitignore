@@ -11,6 +11,10 @@ public/js
 public/css/*
 public/css
 
+### Composer
+/vendor/
+composer.lock
+
 ### local db
 data/mysql
 

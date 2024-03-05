@@ -9,10 +9,7 @@ module.exports = {
   },
   blocks: {
     'custom-block': {
-      css: 'custom-block.css',
-      js: 'custom-block.js',
-      editorCss: 'custom-block-editor.css',
-      editorJs: 'custom-block-editor.js',
+      js: 'custom-block.jsx',
     }
   }
 };

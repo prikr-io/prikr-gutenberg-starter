@@ -3,6 +3,9 @@
  * Title: Example Pattern
  * Slug: prikr-gutenberg-starter/example
  * Description: A simple pattern with a heading and a paragraph.
+ * Category: text
+ * Keywords: simple, heading, paragraph
+ * Author: Jasper van Doorn
  */
 if (function_exists('register_block_pattern')) {
   register_block_pattern(
