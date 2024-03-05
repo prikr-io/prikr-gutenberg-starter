@@ -1,0 +1,40 @@
+@layer base {
+  body, html {
+    @apply antialiased font-body;
+  }
+  h1 {
+    @apply font-medium text-dark-grey;
+  }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-normal leading-normal text-dark-grey;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    @apply font-sans;
+  }
+  .h1 {
+    @apply font-sans text-[28px] font-medium lg:text-[48px] leading-normal text-dark-grey;
+  }
+  .h2 {
+    @apply font-sans text-2xl font-normal md:text-3xl lg:text-3xl leading-normal text-dark-grey;
+  }
+  .h3 {
+    @apply font-sans text-xl font-normal lg:text-2xl leading-normal text-dark-grey;
+  }
+  .h4 {
+    @apply font-sans text-lg font-normal lg:text-2xl leading-normal text-dark-grey;
+  }
+  .h5 {
+    @apply font-sans text-base font-normal lg:text-lg leading-normal text-dark-grey;
+  }
+  a {
+    @apply transition;
+  }
+
+  strong {
+    @apply font-bold;
+  }
+}

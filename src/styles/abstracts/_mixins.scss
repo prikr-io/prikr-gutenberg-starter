@@ -1,0 +1,28 @@
+// Breakpoints
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1366px,
+  '2xl': 1536px,
+);
+
+@mixin respond-to($breakpoint) {
+  $value: map-get($breakpoints, $breakpoint);
+  @if $breakpoint== 'desktop' {
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else if $value !=null {
+    @media (max-width: $value) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-from($breakpoint) {
+  $value: map-get($breakpoints, $breakpoint);
+  @media (min-width: $value) {
+    @content;
+  }
+}

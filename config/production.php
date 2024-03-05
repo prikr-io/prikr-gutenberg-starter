@@ -23,6 +23,7 @@ if (!defined('PRIKR_PROJECT_COLOR')) { define('PRIKR_PROJECT_COLOR', '#123123');
  */
 if (!defined('PRIKR_ENABLE_ACCORDION')) { define('PRIKR_ENABLE_ACCORDION', true); }
 if (!defined('PRIKR_ENABLE_MODALS')) { define('PRIKR_ENABLE_MODALS', false); }
+if (!defined('PRIKR_ENABLE_SPLIDE')) { define('PRIKR_ENABLE_SPLIDE', false); }
 
 /**
  * DEBUG MODUS

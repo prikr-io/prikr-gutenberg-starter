@@ -26,7 +26,8 @@ function prikr_enqueue_scripts()
     'themeScripts' => array(
       'wpml'  => PRIKR_ENABLE_WPML,
       'accordion' => PRIKR_ENABLE_ACCORDION,
-      'modal' => PRIKR_ENABLE_MODALS
+      'modal' => PRIKR_ENABLE_MODALS,
+      'splide' => PRIKR_ENABLE_SPLIDE,
     )
   ));
 

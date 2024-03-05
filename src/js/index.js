@@ -23,6 +23,7 @@ import '../styles/main.scss'
 if (globals.themeScripts.wpml) { const LanguageSwitcher = import('./theme/LanguageSwitcher.js'); } // untested
 if (globals.themeScripts.accordion) { const Accordion = import('./theme/Accordion.js'); } // untested
 if (globals.themeScripts.modal) { const Modal = import('./theme/Modal.js'); } // untested
+if (globals.themeScripts.splide) { const Splide = import('./vendors/Splide.js'); } // untested
 
 /**
  * Importing hot module

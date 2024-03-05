@@ -19,4 +19,4 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 <body <?php body_class(); ?>>
   
-  <main class="bg-white">
+  <main>

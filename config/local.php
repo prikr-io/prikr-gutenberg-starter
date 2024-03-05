@@ -23,6 +23,7 @@ if (!defined('PRIKR_PROJECT_COLOR')) { define('PRIKR_PROJECT_COLOR', '#123123');
  */
 if (!defined('PRIKR_ENABLE_ACCORDION')) { define('PRIKR_ENABLE_ACCORDION', true); }
 if (!defined('PRIKR_ENABLE_MODALS')) { define('PRIKR_ENABLE_MODALS', false); }
+if (!defined('PRIKR_ENABLE_SPLIDE')) { define('PRIKR_ENABLE_SPLIDE', false); }
 
 /**
  * DEBUG MODUS
@@ -43,13 +44,13 @@ if (!defined('PRIKR_THEME_PUBLIC_DIR')) { define('PRIKR_THEME_PUBLIC_DIR', PRIKR
 /**
  * PLUGINS
  */
-if (!defined('PRIKR_ENABLE_YOAST_SEO')) { define('PRIKR_ENABLE_YOAST_SEO', true); }
+if (!defined('PRIKR_ENABLE_YOAST_SEO')) { define('PRIKR_ENABLE_YOAST_SEO', false); }
 if (!defined('PRIKR_ENABLE_WPML')) { define('PRIKR_ENABLE_WPML', false); }
 if (!defined('PRIKR_ENABLE_ACF')) { define('PRIKR_ENABLE_ACF', true); }
-if (!defined('PRIKR_ENABLE_WOOCOMMERCE')) { define('PRIKR_ENABLE_WOOCOMMERCE', true); }
+if (!defined('PRIKR_ENABLE_WOOCOMMERCE')) { define('PRIKR_ENABLE_WOOCOMMERCE', false); }
 if (!defined('PRIKR_ENABLE_GRAVITY_FORMS')) { define('PRIKR_ENABLE_GRAVITY_FORMS', true); }
-if (!defined('PRIKR_ENABLE_W3_TOTAL_CACHE')) { define('PRIKR_ENABLE_W3_TOTAL_CACHE', true); }
-if (!defined('PRIKR_ENABLE_IMAGE_OFFLOADER')) { define('PRIKR_ENABLE_IMAGE_OFFLOADER', true); }
+if (!defined('PRIKR_ENABLE_W3_TOTAL_CACHE')) { define('PRIKR_ENABLE_W3_TOTAL_CACHE', false); }
+if (!defined('PRIKR_ENABLE_IMAGE_OFFLOADER')) { define('PRIKR_ENABLE_IMAGE_OFFLOADER', false); }
 
 /**
  * SECURITY

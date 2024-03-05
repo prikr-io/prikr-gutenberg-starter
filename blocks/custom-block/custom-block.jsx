@@ -8,11 +8,11 @@ registerBlockType(globals.prefix + '/custom-block', {
   attributes: {
     title: {
       type: 'string',
-      default: 'Standaard content',
+      default: 'Default title',
     },
     content: {
-      type: 'string',
-      default: 'Default Content',
+      type: 'wysiwyg',
+      default: 'Default content',
     },
   },
 

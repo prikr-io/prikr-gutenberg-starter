@@ -1,0 +1,85 @@
+/**
+** We should not have to edit the styling below. This is just for base layout styling.
+** For custom styling, please use the scss/components/_forms.scss file
+**/
+
+/**
+ * Error display
+ */
+.gfield_validation_message,
+.validation_message,
+.gform_validation_errors {
+  @apply empty:hidden mb-4 border rounded italic text-red-700 text-sm;
+}
+.gform_validation_errors ol{
+  @apply text-xs
+}
+
+.gfield_validation_message{
+  @apply px-2 py-1 mt-1
+}
+
+// H2 error message
+.gform_wrapper .gform_submission_error{
+  @apply text-base my-0
+}
+
+.gform_validation_errors {
+  @apply px-3 py-2 rounded border border-red-500 bg-white text-red-700 not-italic
+}
+.gfield_error [aria-invalid='true'] {
+  @apply border-red-500;
+}
+
+/**
+ * Grid display
+ */
+.gform_fields {
+  @apply grid w-full gap-x-4 gap-y-4 md:grid-cols-12;
+}
+.gfield {
+  @apply md:col-span-full min-w-0;
+}
+.gfield--width-three-quarter {
+  @apply md:col-span-9;
+}
+.gfield.gfield--width-two-thirds {
+  @apply md:col-span-8;
+}
+.gfield--width-seven-twelfths {
+  @apply md:col-span-7;
+}
+.gfield--width-half {
+  @apply md:col-span-6;
+}
+.gfield.gfield--width-five-twelfths {
+  @apply md:col-span-5;
+}
+.gfield--width-third {
+  @apply md:col-span-4;
+}
+.gfield--width-quarter {
+  @apply md:col-span-3;
+}
+
+/**
+ * AJAX loading indicator
+ */
+.gform_wrapper {
+  @apply relative;
+}
+.gform_ajax_spinner {
+  @apply absolute left-0 top-0 h-full w-full object-scale-down object-center backdrop-blur-sm;
+}
+
+/**
+ *Hidden labels
+ */
+.hidden_label .gfield_label,
+.hidden_sub_label,
+.screen-reader-text {
+  @apply sr-only;
+}
+.gform_required_legend{
+  @apply sr-only;
+}
