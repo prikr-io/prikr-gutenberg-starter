@@ -1,18 +1,18 @@
-// const purgecss = require('@fullhuman/postcss-purgecss')({
-//   content: [
-//     './src/**/*.html',
-//     './src/**/*.php',
-//     './src/**/*.js',
-//   ],
-
-//   // Include any special characters you're using in this regular expression
-//   defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
-// });
+const tailwindcss = require('tailwindcss');
+const purgecss = require('@fullhuman/postcss-purgecss');
+const cssnano = require('cssnano');
+const autoprefixer = require('autoprefixer');
+const tailwindConfig = require('./tailwind.config.js');
 
 module.exports = {
   plugins: [
-    // require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer')
-  ],
-};
+    tailwindcss('./tailwind.config.js'),
+    cssnano({
+      preset: 'default',
+    }),
+    purgecss({
+      content: [...tailwindConfig.content]
+    }),
+    autoprefixer
+  ]
+}

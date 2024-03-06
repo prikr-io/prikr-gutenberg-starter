@@ -1,26 +1,36 @@
 const path = require('path');
-const themeConfig = require('./theme.config');
+const fs = require('fs');
 const SyncThemeConfigPlugin = require('./config/js/SyncThemeConfigPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {
+  CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 
 const LOCAL_ENV_URL = 'http://localhost/' // should contain http: or https:
 const DEV_MODE = process.env.NODE_ENV !== "production";
 
 function getBlockEntries() {
+  const blocksDir = './blocks';
+  const blocks = fs.readdirSync(blocksDir, {
+      withFileTypes: true
+    })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+
   const entries = {};
-  for (const block in themeConfig.blocks) {
-    entries[block] = `./blocks/${block}/${themeConfig.blocks[block].js}`;
-  }
+  blocks.forEach(block => {
+    entries[block] = path.resolve(__dirname, `${blocksDir}/${block}/${block}.jsx`);
+  });
+
   return entries;
 }
 
 const plugins = [
   new SyncThemeConfigPlugin({
-    configPath: path.resolve(__dirname, 'theme.config.js')
+    configPath: path.resolve(__dirname, 'tailwind.config.js')
   }),
   new MiniCssExtractPlugin({
     filename: !DEV_MODE ? "../css/[name].css" : "../css/[name].[contenthash].css",
@@ -33,7 +43,7 @@ const plugins = [
     cleanOnceBeforeBuildPatterns: [`${path.resolve(__dirname, 'public/js')}/*.hot-update.*`],
     dry: false,
     dangerouslyAllowCleanPatternsOutsideProject: true
-}),
+  }),
 ]
 
 module.exports = {
@@ -61,39 +71,45 @@ module.exports = {
         }
       },
       {
-        test: /\.(scss|css)$/,
-        exclude: /node_modules/,
+        // Extract any SCSS content and minimize
+        test: /\.scss$/,
         use: [
-          DEV_MODE ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
-              sourceMap: DEV_MODE,
-            },
+              importLoaders: 1
+            }
           },
           {
-            loader: "sass-loader",
-            options: {
-              sourceMap: DEV_MODE,
-            },
+            loader: 'postcss-loader'
           },
           {
-            loader: "postcss-loader",
+            loader: 'sass-loader',
+          }
+        ]
+      },
+      {
+        // Extract any CSS content and minimize
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
             options: {
-              postcssOptions: {
-                config: "./postcss.config.js",
-              },
-              sourceMap: DEV_MODE,
-            },
+              importLoaders: 1
+            }
           },
-          
-        ],
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name][ext]'  // Output fonts in a 'fonts' directory
+          filename: 'fonts/[name][ext]' // Output fonts in a 'fonts' directory
         }
       },
     ]
@@ -130,13 +146,13 @@ module.exports = {
         ignored: [
           /node_modules/,
           /blocks/
-        ] 
+        ]
       },
     },
     proxy: [{
       context: () => true,
       target: LOCAL_ENV_URL, // Replace with your actual WordPress port
-      changeOrigin: true,
+      changeOrigin: false,
       secure: false
     }],
     port: 3000,

@@ -22,7 +22,7 @@ $right: 0 !default;
  * Change the above variables first, before trying to edit the styles themselves.
  *
  */
-.splide {
+ .splide {
   $root: &;
 
   button:disabled {
@@ -39,9 +39,6 @@ $right: 0 !default;
     border: $button-border;
     cursor: pointer;
     padding: $button-padding;
-    // position: absolute;
-    // top: 50%;
-    // transform: translateY(-50%);
     z-index: 1;
 
     @if $opacity {
@@ -99,7 +96,6 @@ $right: 0 !default;
       left: $left;
 
       svg {
-        // transform: scaleX(-1);
       }
     }
 
@@ -120,12 +116,6 @@ $dot-background-hover: #D0D0D0 !default;
   $root: &;
 
   &__pagination {
-    // top: 100%;
-    // left: 0;
-    // position: absolute;
-    // right: 0;
-    // z-index: 1;
-
     li {
       flex-grow: 1;
     }
